@@ -12,7 +12,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Peer from "peerjs-client";
+import { Peer } from "peerjs";
 import {
   memo,
   useCallback,
@@ -43,14 +43,22 @@ const myPeer = new Peer(uuid4(), {
   port: "443",
   path: "peerjs",
   config: {
-    "iceServers": [{"iceTransportPolicy": "relay","url":"stun:global.stun.twilio.com:3478?transport=udp",
-    "urls":"stun:global.stun.twilio.com:3478?transport=udp"},
-    {"iceTransportPolicy": "relay", "url":"turn:global.turn.twilio.com:3478?transport=udp","username":"015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
-    "urls":"turn:global.turn.twilio.com:3478?transport=udp","credential":"EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="},
-    {"iceTransportPolicy": "relay", "url":"turn:global.turn.twilio.com:3478?transport=tcp","username":"015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
-    "urls":"turn:global.turn.twilio.com:3478?transport=tcp","credential":"EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="},
-    {"iceTransportPolicy": "relay", "url":"turn:global.turn.twilio.com:443?transport=tcp","username":"015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
-    "urls":"turn:global.turn.twilio.com:443?transport=tcp","credential":"EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="}]
+    "iceServers": [{
+      "iceTransportPolicy": "relay", "url": "stun:global.stun.twilio.com:3478?transport=udp",
+      "urls": "stun:global.stun.twilio.com:3478?transport=udp"
+    },
+    {
+      "iceTransportPolicy": "relay", "url": "turn:global.turn.twilio.com:3478?transport=udp", "username": "015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
+      "urls": "turn:global.turn.twilio.com:3478?transport=udp", "credential": "EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="
+    },
+    {
+      "iceTransportPolicy": "relay", "url": "turn:global.turn.twilio.com:3478?transport=tcp", "username": "015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
+      "urls": "turn:global.turn.twilio.com:3478?transport=tcp", "credential": "EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="
+    },
+    {
+      "iceTransportPolicy": "relay", "url": "turn:global.turn.twilio.com:443?transport=tcp", "username": "015d5293a0ecb39006dd61708359c7ab196248418e4409e777c2b708590912ff",
+      "urls": "turn:global.turn.twilio.com:443?transport=tcp", "credential": "EDsTIMdiD44e2nzPlvjxWj7Ga1v7RNmDeerIBfsJ3Gw="
+    }]
   }
 });
 
@@ -197,17 +205,16 @@ export const VideoArea = memo(({ roomID, exitRoom }) => {
   return (
     <div style={{ display: "flex", height: "100%", flexDirection: "column" }}>
       <div
-        className={`videos${
-          screenSharingInProgress ? " flex-direction-column" : ""
-        }`}
+        className={`videos${screenSharingInProgress ? " flex-direction-column" : ""
+          }`}
       >
         <div
           className={
             screenSharingInProgress
               ? "top-row"
               : incomingVideoStream !== null
-              ? "video-2"
-              : "video-1"
+                ? "video-2"
+                : "video-1"
           }
         >
           <video
