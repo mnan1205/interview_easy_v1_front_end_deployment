@@ -31,9 +31,11 @@ export const initEventListeners = ({ setValue }, ownUserInfo) => {
     setValue((state) => {
       const otherUserInfo = {};
       for (let user in usersList) {
-        if (user !== ownUserInfo.userName) {
-          otherUserInfo.userName = user;
-          otherUserInfo.email = usersList[user];
+        if (user !== `${ownUserInfo.userName}${ownUserInfo.email}`) {
+          otherUserInfo.userName = usersList[user].userName;
+          otherUserInfo.email = usersList[user].email;
+          otherUserInfo.uid = usersList[user].uid;
+          otherUserInfo.isInterviewer = usersList[user].isInterviewer;
         }
       }
 
@@ -44,6 +46,12 @@ export const initEventListeners = ({ setValue }, ownUserInfo) => {
   socket.on("on-screen-sharing", (isOtherUserSharingScreen) => {
     setValue((state) => {
       return { ...state, isOtherUserSharingScreen };
+    });
+  });
+
+  socket.on("on-code-updated", (newCode) => {
+    setValue((state) => {
+      return { ...state, code: newCode };
     });
   });
 };

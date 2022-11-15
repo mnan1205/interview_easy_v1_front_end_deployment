@@ -8,10 +8,12 @@ export const SocketContext = createContext({
   otherUserInfo: {},
   isOtherUserSharingScreen: false,
   otherUserPeerID: undefined,
+  code: "",
 });
 
 // export const socket = io("http://localhost:3001");
 export const socket = io("https://interview-easy-v1-back-end.herokuapp.com");
+
 
 export const SocketProvider = (props) => {
   const [ownUserInfo] = useContext(UserDetailsContext);
@@ -20,6 +22,7 @@ export const SocketProvider = (props) => {
     otherUserInfo: {},
     isOtherUserSharingScreen: false,
     otherUserPeerID: undefined,
+    code: "",
   });
 
   useEffect(() => {
