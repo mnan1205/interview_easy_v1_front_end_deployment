@@ -32,6 +32,6 @@ export const config = {
   ],
   // serverHostName: "localhost",
   // serverPort: "3001",
-  host: "interview-easy-v1-back-end.herokuapp.com",
-  port: "443",
+  serverHostName: "interview-easy-v1-back-end.herokuapp.com",
+  serverPort: "443",
 };
