@@ -54,6 +54,5 @@
   },
   "engines": {
     "node": "16.x"
-  },
-  "proxy": "https://interview-easy-v1-front-end.herokuapp.com"
+  }
 }
