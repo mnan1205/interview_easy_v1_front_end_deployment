@@ -256,6 +256,7 @@ export const VideoArea = memo(
                 ref={ownVideoRef}
                 playsInline
                 autoPlay
+                muted="muted"
               ></video>
               <Chip className="user-info" label={ownUserInfo.userName} />
             </div>
